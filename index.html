@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>XE Widget – Opulent Hardware</title>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Main widget container */
+  .xe-widget {
+    position: relative;
+    width: 696px;          /* matches the image aspect */
+    height: 416px;
+    background-image: url("https://drive.google.com/uc?export=view&id=1LaZOWM6wO7EZgDH5zMUPX1NqCA9Ob2ym");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+
+  /* black “screen” area for the websites */
+  .screen-frame {
+    position: absolute;
+    top: 7%;      /* adjust if the iframe isn’t perfectly aligned */
+    left: 3%;
+    width: 94%;
+    height: 62%;
+    overflow: hidden;
+  }
+
+  .screen-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* invisible clickable area over the knob */
+  .knob-button {
+    position: absolute;
+    right: 5%;     /* move horizontally if needed */
+    bottom: 4%;    /* move vertically if needed */
+    width: 19%;
+    height: 38%;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+  }
+
+  .knob-button:active {
+    outline: 2px solid rgba(255,255,255,0.25); /* small visual feedback */
+  }
+</style>
+</head>
+<body>
+  <div class="xe-widget">
+    <div class="screen-frame">
+      <iframe id="screen" src="" loading="lazy"></iframe>
+    </div>
+    <button class="knob-button" id="knob" aria-label="Change screen"></button>
+  </div>
+
+<script>
+  const urls = [
+    "https://opulent-hardware.github.io/Chronograph-A-iframe/",
+    "https://opulent-hardware.github.io/Calendar-A/",
+    "https://opulent-hardware.github.io/Opulent-Hardware-Calendar-w-habits/"
+  ];
+
+  const iframe = document.getElementById("screen");
+  const knob   = document.getElementById("knob");
+
+  let currentIndex = 0;
+
+  function loadCurrent() {
+    iframe.src = urls[currentIndex];
+  }
+
+  knob.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % urls.length;
+    loadCurrent();
+  });
+
+  // Load first site on start
+  loadCurrent();
+</script>
+</body>
+</html>
